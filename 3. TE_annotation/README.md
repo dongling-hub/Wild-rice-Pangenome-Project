@@ -2,6 +2,14 @@
 
 This document provides instructions and information on the TE (Transposable Element) annotation and analysis process.
 
+- [TE Annotation](#te-annotation)
+  - [1. TE annotation](#1-te-annotation)
+  - [2. Construct a pan-genome TE library](#2-construct-a-pan-genome-te-library)
+  - [3. The identify of Or-IIIa-lager Gypsy families](#3-the-identify-of-or-iiia-lager-gypsy-families)
+  - [4. Analysis of the LTR family dynamics](#4-analysis-of-the-ltr-family-dynamics)
+  - [5. The identification of TE insertion polymorphism (TIP)](#5-the-identification-of-te-insertion-polymorphism-tip)
+  - [6. The identification of centromeres and telomeres](#6-the-identification-of-centromeres-and-telomeres)
+
 ## 1. TE annotation
 
 ```shell
@@ -142,4 +150,18 @@ python combines.adjacent.TIP.py INS.TIP.superfamily.txt 50 INS.TIP.superfamily.m
 # Count the types of TIPs (the most common type in the population)
 python sta.TIP_type.py DEL.TIP.superfamily.merge.txt >DEL.TIP.merge.superfamily.list
 python sta.TIP_type.py INS.TIP.superfamily.merge.txt >INS.TIP.merge.superfamily.list
+```
+
+## 6. The identification of centromeres and telomeres
+
+```shell
+# Telomere
+perl telomere_finder.pl --repeat-unit TTTAGGG ${sample}.genome.fasta >${sample}_telomere.info
+
+# Centromere
+clustalw2 -INFILE=rice_CentO_2002.fasta -TYPE=DNA -OUTFILE=rice_CentO_2002.aln
+hmmbuild --dna rice_CentO_2002.hmm rice_CentO_2002.stockholm
+nhmmer -o ${sample}_CentO.out --tblout ${sample}_CentO.tblout -E 1e-5 --cpu ${thread} rice_CentO_2002.hmm ${sample}.genome.fasta
+mafft --maxiterate 1000 --globalpair --thread ${thread} all_162_CentO_155_cons.fa >all_162_CentO_155_cons.mafft.accuracy.aln.fa
+iqtree -s all_162_CentO_155_cons.mafft.accuracy.aln.fa -nt AUTO -b 100 -pre all_162_CentO_155_cons.mafft.accuracy.aln
 ```
