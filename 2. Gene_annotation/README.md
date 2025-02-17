@@ -1,28 +1,13 @@
 # Gene annotation
 
 - [Gene annotation](#gene-annotation)
-  - [1. The identification of centromeres and telomeres](#1-the-identification-of-centromeres-and-telomeres)
-  - [2. Structure annotation](#2-structure-annotation)
-  - [3. Functional annotation](#3-functional-annotation)
-  - [4. The identification of allelic genes](#4-the-identification-of-allelic-genes)
-  - [5. The identification of DEA genes](#5-the-identification-of-dea-genes)
-  - [6. The identification of RGA](#6-the-identification-of-rga)
+  - [1. Structure annotation](#1-structure-annotation)
+  - [2. Functional annotation](#2-functional-annotation)
+  - [3. The identification of allelic genes](#3-the-identification-of-allelic-genes)
+  - [4. The identification of DEA genes](#4-the-identification-of-dea-genes)
+  - [5. The identification of RGA](#5-the-identification-of-rga)
 
-## 1. The identification of centromeres and telomeres
-
-```shell
-# Telomere
-perl telomere_finder.pl --repeat-unit TTTAGGG ${sample}.genome.fasta >${sample}_telomere.info
-
-# Centromere
-clustalw2 -INFILE=rice_CentO_2002.fasta -TYPE=DNA -OUTFILE=rice_CentO_2002.aln
-hmmbuild --dna rice_CentO_2002.hmm rice_CentO_2002.stockholm
-nhmmer -o ${sample}_CentO.out --tblout ${sample}_CentO.tblout -E 1e-5 --cpu ${thread} rice_CentO_2002.hmm ${sample}.genome.fasta
-mafft --maxiterate 1000 --globalpair --thread ${thread} all_162_CentO_155_cons.fa >all_162_CentO_155_cons.mafft.accuracy.aln.fa
-iqtree -s all_162_CentO_155_cons.mafft.accuracy.aln.fa -nt AUTO -b 100 -pre all_162_CentO_155_cons.mafft.accuracy.aln
-```
-
-## 2. Structure annotation
+## 1. Structure annotation
 
 Three distinct strategies, comprising ab initio, homology-based, and transcriptome-based predictions, were integrated to generate the predicted gene models.
 
@@ -126,13 +111,13 @@ gff3_file_to_proteins.pl ${sample}.evm.out.gff3 ${sample}.nucleus.masked.fasta p
 gff3_file_to_proteins.pl ${sample}.evm.out.gff3 ${sample}.nucleus.masked.fasta CDS >${sample}.evm.out.cds
 ```
 
-## 3. Functional annotation
+## 2. Functional annotation
 
 ```shell
 interproscan.sh -i ${sample}.evm.out.aa -f tsv -dp --goterms --pathways -cpu ${threads}
 ```
 
-## 4. The identification of allelic genes
+## 3. The identification of allelic genes
 
 This pipeline identifies allelic genes between p-contigs (primary contigs) and a-contigs (alternative contigs) in HiFi genome assemblies. It employs multiple complementary approaches to ensure accurate identification of both homozygous and heterozygous alleles.
 
@@ -204,7 +189,7 @@ cat <(awk '{print ${sample}"\t"$2"\t"${sample}5}' \
     sort |uniq -u > ${sample}.hetrozygous_allele.list
 ```
 
-## 5. The identification of DEA genes
+## 4. The identification of DEA genes
 
 The identification of differential expression allelic genes (DEA) was based on three standards that must be simultaneously satisfied:
 
@@ -228,7 +213,7 @@ done
 sh get_ASE.sh ${sample}
 ```
 
-## 6. The identification of RGA
+## 5. The identification of RGA
 
 ```shell
 # Identify RGAs using RGAugury
