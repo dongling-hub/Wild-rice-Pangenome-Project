@@ -4,7 +4,7 @@
   - [1. The identify of indica-japonica differentiated variations](#1-the-identify-of-indica-japonica-differentiated-variations)
   - [2. Ascertain the origin of indica–japonica differentiated variations](#2-ascertain-the-origin-of-indicajaponica-differentiated-variations)
 
-## 1. The identify of indica-japonica differentiated variations
+## 1. The identification of indica-japonica differentiated variations
 
 ```shell
 vcftools --vcf ${merge}.vcf.gz --keep ${japonica}.list --freq --out ${japonica}
