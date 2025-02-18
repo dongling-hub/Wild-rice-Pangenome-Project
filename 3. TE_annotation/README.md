@@ -23,7 +23,7 @@ sh panEDTA_construct.sh -g genome_list.txt -t ${thread}
 sh panEDTA_reanno.sh -g genome_list.txt -t ${thread}
 ```
 
-## 3. The identify of Or-IIIa-lager Gypsy families
+## 3. The identification of Or-IIIa-lager Gypsy families
 
 ```shell
 grep Gypsy panTE.anno.TEfamily.txt | cut -f 2 >panTE.anno.Gypsyfamily.list
