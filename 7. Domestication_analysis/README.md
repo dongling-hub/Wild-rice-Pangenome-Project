@@ -1,11 +1,11 @@
 # Domestication analysis
 
 - [Domestication analysis](#domestication-analysis)
-  - [1. Identification of genomic selective sweep](#1-identification-of-genomic-selective-sweep)
+  - [1. The identification of genomic selective sweep](#1-identification-of-genomic-selective-sweep)
   - [2. The identification domesticated-related PAVs (domPAVs)](#2-the-identification-domesticated-related-pavs-dompavs)
   - [3. Analysis of domestication genes](#3-analysis-of-domestication-genes)
 
-## 1. Identification of genomic selective sweep
+## 1. The identification of genomic selective sweep
 
 ```shell
 # piRatio
