@@ -21,4 +21,4 @@ All data and results from this project are available at the [RicePandb database]
 
 ## Citations
 
-Please cite our paper if you find these scripts useful: [Citation details to be added].
+Please cite our paper if you find these scripts useful: Guo, D., Li, Y., Lu, H. et al. A pangenome reference of wild and cultivated rice. Nature (2025). https://doi.org/10.1038/s41586-025-08883-6.
